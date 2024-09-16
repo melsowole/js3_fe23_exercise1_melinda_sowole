@@ -1,0 +1,18 @@
+body {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul a {
+  text-decoration: underline;
+}
