@@ -6,9 +6,30 @@ const navItems = document.querySelectorAll("ul a");
 
 for (const item of navItems) {
   item.addEventListener("click", () => {
+    history.pushState({ page: item.id }, "", "/" + item.id + ".html");
     navigate(item.id);
   });
 }
+
+window.addEventListener("popstate", (event) => {
+  if (event.state) {
+    switch (event.state.page) {
+      case "home":
+        navigate("home");
+        break;
+      case "contact":
+        navigate("contact");
+        break;
+      case "about":
+        navigate("about");
+        break;
+      default:
+        navigate("home");
+    }
+  } else {
+    navigate("home");
+  }
+});
 
 async function navigate(pageName) {
   // define path
@@ -16,9 +37,6 @@ async function navigate(pageName) {
 
   //start load
   loading();
-
-  // change url
-  history.pushState(null, "", "/" + pageName + ".html");
 
   // fetch page
   const response = await fetch(path);
